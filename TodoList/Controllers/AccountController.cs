@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TodoList.Models;
 using TodoList.ViewModels.Account;
 
 namespace TodoList.Controllers
 {
 	public class AccountController : Controller
 	{
-		private readonly UserManager<IdentityUser> _userManager;
-		private readonly SignInManager<IdentityUser> _signInManager;
+		private readonly UserManager<TodoUser> _userManager;
+		private readonly SignInManager<TodoUser> _signInManager;
 
-		public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+		public AccountController(UserManager<TodoUser> userManager, SignInManager<TodoUser> signInManager)
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
@@ -17,17 +18,20 @@ namespace TodoList.Controllers
 
 
 		[HttpGet]
+		[Route("Register")]
+
 		public IActionResult Register()
 		{
 			return View();
 		}
 
 		[HttpPost]
+		[Route("Register")]
 		public async Task<IActionResult> Register(RegisterViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = new IdentityUser()
+				var user = new TodoUser()
 				{
 					UserName = model.UserName,
 					Email = model.Email,
@@ -38,7 +42,7 @@ namespace TodoList.Controllers
 
 				if (result.Succeeded)
 				{
-					return RedirectToAction("Index", "Home");
+					return Redirect("/login");
 				}
 
 				foreach (var error in result.Errors)
@@ -51,22 +55,25 @@ namespace TodoList.Controllers
 		}
 
 		[HttpGet]
+		[Route("LogIn")]
+
 		public IActionResult Login(string returnUrl = null)
 		{
 			if (_signInManager.IsSignedIn(User))
-				return RedirectToAction("Index", "Home");
-
+				return Redirect("/");
 			ViewData["returnUrl"] = returnUrl;
 			return View();
 		}
 
 		[HttpPost]
+		[Route("LogIn")]
+
 		public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
 		{
 			if (_signInManager.IsSignedIn(User))
-				return RedirectToAction("Index", "Home");
+                return Redirect("/");
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
 			{
 				var result = await _signInManager.PasswordSignInAsync(
 					model.UserName, model.Password, model.RememberMe, true);
@@ -74,10 +81,10 @@ namespace TodoList.Controllers
 				if (result.Succeeded)
 				{
 					if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-						return Redirect(returnUrl);
+						return Redirect("/");
 
-					return RedirectToAction("Index", "Home");
-				}
+                    return Redirect("/");
+                }
 
 				if (result.IsLockedOut)
 				{
@@ -90,12 +97,13 @@ namespace TodoList.Controllers
 			return View(model);
 		}
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
+
+
+		[Route("LogOut")]
 		public async Task<IActionResult> LogOut()
 		{
 			await _signInManager.SignOutAsync();
-			return RedirectToAction("Index", "Home");
+			return Redirect("/Login");
 		}
 
 	}

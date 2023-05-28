@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+
+
+    <script src="/js/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="~/css/images/Untitled-1-min.png" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/noUiSlider/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/CustomCss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+@*    <link rel="stylesheet" type="text/css" href="/css/bootstrap-rtl.min.css">*@
+    <link rel="stylesheet" type="text/css" href="/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/noUiSlider/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/CustomCss.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+    <script src="/js/modernizr-custom.js"></script>
+
+    <div class="landing-layer">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <a href="/" type="submit" class="btn btn-primary"> <i class="zmdi zmdi-home"></i></a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                                                    <a href="/Logout" type="submit" class="btn btn-warning"> <i class="zmdi zmdi-door-open"></i> LOGOUT </a>
+
+                        }
+
+
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                      
+                    </div>
+                </div>
+            </nav>
+         </div>
+    </div>
+
+    <!-- main manu -->
+ <!-- /main manu -->
+    <!-- content -->
+    <div class="container" style="padding:100px">
+    @RenderBody()</div>
+    <!-- /content -->
+    <!-- footer -->
+    <div class="landing-layer">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>    <!-- /footer -->
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+<script src="/js/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("Scripts",false)
+
+</body>
+</html>

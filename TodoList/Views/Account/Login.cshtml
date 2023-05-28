@@ -5,38 +5,52 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+  
+<main class="client-page">
+    <div class="container-content">
 
-<div>
-    <form asp-controller="Account" asp-action="Login"  asp-route-returnUrl="@ViewData["returnUrl"]" method="post">
-        <div asp-validation-summary="ModelOnly"></div>
+        <header style="color : #2ec4b6 "><h2> LOGIN </h2></header>
 
-        @if (ViewData["ErrorMessage"] != null)
-        {
-            <div class="text-danger">@ViewData["ErrorMessage"]</div>
-        }
+        <div class="form-layer">
+            <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["returnUrl"]" method="post">
+                <div asp-validation-summary="ModelOnly"></div>
 
-        <label asp-for="UserName" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
+                @if (ViewData["ErrorMessage"] != null)
+                {
+                    <div class="text-danger">@ViewData["ErrorMessage"]</div>
+                }
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-account"></i></span>
+
+
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+
+                    <input asp-for="Password" type="password" class="form-control"/>
+                   
+                </div>
+
+                <div class="form-group">
+                    <label style="color:#f2f2f2" asp-for="RememberMe"></label>
+                    <input asp-for="RememberMe" />
+                    <span asp-validation-for="RememberMe"></span>
+                </div>
+                <div>
+                    <button style="display:inline" type="submit" class="btn btn-success"> <i class="zmdi zmdi-account"></i> LOGIN</button>
+                    <a href="/Register" type="submit" class="btn btn-primary"> <i class="zmdi zmdi-account"></i> REGISTER </a>
+                  
+                </div>
+           
+            </form>
+ 
         </div>
 
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="RememberMe"></label>
-            <input asp-for="RememberMe" />
-            <span asp-validation-for="RememberMe"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">ورود</button>
-    </form>
-</div>
+    </div>
+</main>
 
 
 @section Scripts

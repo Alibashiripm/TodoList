@@ -8,13 +8,13 @@ namespace TodoList.ViewModels.Account
 {
     public class LoginViewModel
     {
-        [Required, Display(Name = "نام کاربری")]
+        [Required, Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [Required, Display(Name = "رمز عبور")]
+        [Required, Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "مرا به خاطر بسپار")]
+        [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
 
     }
